@@ -43,7 +43,6 @@ class paintPanel(wx.Panel):
 		w, h = self.GetClientSize()
 		dc = wx.AutoBufferedPaintDC(self)
 		dc.Clear()
-		print('')
 		s, v = self.disectRect(self.weights, 10, 10, w - 20, h - 20)
 		for x in s:
 			print('Draw: l={}, t={}, w={}, h={}'.format(*x))
