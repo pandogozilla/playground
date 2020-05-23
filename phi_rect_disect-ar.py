@@ -6,7 +6,7 @@ class paintPanel(wx.Panel):
 	def disectRect(self, weight, l, t, r, b, weightacc=None):
 		w, h = r - l, b - t
 		if len(weight) == 1:
-			return [(l, t, w, h)], abs(w / h - 1.0)
+			return [(l, t, w, h)], w + h
 		else:
 			weightAcc = list(itertools.accumulate(weight)) if weightacc is None else weightacc
 			wtSum = weightAcc[-1]
