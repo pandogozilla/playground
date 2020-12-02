@@ -4,15 +4,16 @@
 
 def fib(n):
 	assert type(n) == int
-	c, e, s = abs(n), (1 if n > 0 else -1, 1), (2, 0)
+	c, a, e, s = abs(n), abs(n), (1, 1), (2, 0)
 	add = lambda a, b, p, q: ((a*p+5*b*q)//2, (a*q+b*p)//2)
+	dbl = lambda a, b, p: (5*b*b+2*p, a*b)
 	while c > 0:
 		if c % 2 == 1:
 			s = add(*e, *s)
-		e = add(*e, *e)
+		e = dbl(*e, 1 if c < a else -1)
 		c = c // 2
-	return s[1]
+	return -s[1] if n < 0 and a%2 == 0 else s[1]
 
 n = 5000000
 with open('f%d.txt'%n, 'wt') as f:
-	f.write(str(fib(5000000)))
+	f.write(str(fib(n)))
