@@ -1,0 +1,65 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\begin{document}
+
+\newcommand{\pad}{\vspace{12pt}}
+
+
+\begin{center}
+\begin{LARGE}
+Fibonacci with $\mathbb{Z}[\sqrt{5}]$
+\end{LARGE}
+
+\pad
+One does not simply Fibonacci by means of recursion.
+\end{center}
+
+\begin{flushleft}
+
+\section{Fibonacci sequence}
+Computing $F_n$ by the recursion $F_{n+2} = F_{n+1} + F_n$ takes $|n|$ additions. Function $\displaystyle f(z) = \frac{\varphi^z-\overline{\varphi}^z}{\sqrt{5}}$ is an extension to $\mathbb{C}$ for the Fibonacci sequence. Yet, the denominator 2 in $\displaystyle \varphi = \frac{1+\sqrt{5}}{2}$ requires implementation of $\mathbb{Q}[\sqrt{5}]$ arithmetic for $z \in \mathbb{Z}$. That hassle may be bypassed with certain operations on $\mathbb{Z}[\sqrt{5}]$. For a subset $\mathbb{S}$ of $\mathbb{Z}[\sqrt{5}]$, where $\mathbf{a} = a_0 + a_1 \sqrt{5} \sim \left(a_0, a_1\right) \in \mathbb{Z}^2$, define addition \[ \mathbf{a} + \mathbf{b} \sim \left(\frac{a_0b_0+5a_1b_1}{2},\; \frac{a_0b_1+a_1b_0}{2}\right)\] and identity $\mathbf{1} \sim (1, 1)$. Thus $\mathbf{n} \sim (\cdot, F_n), \forall_{n\in \mathbb{Z}}$. 
+
+\pad
+For example, $\mathbf{2} = \mathbf{1} + \mathbf{1} \sim (3, 1) \Rightarrow F_2=1$, $\mathbf{4} = \mathbf{2} + \mathbf{2} \sim (7, 3) \Rightarrow F_4=3$, $\mathbf{6} = \mathbf{2} + \mathbf{4} \sim (18, 8) \Rightarrow F_6=8$, and $\mathbf{64} \sim (23725150497407, 10610209857723) \Rightarrow F_{64}=10610209857723$. 
+
+\pad
+Each addition on $\mathbb{S}$ takes 4 multiplications, 2 additions and 2 shifts. Calculating $n$th Fibonacci number $\left(\lceil\log |n|\rceil + s\right)$ such additions, with a special case for addition $\displaystyle  \mathbf{2n} = \mathbf{n}+\mathbf{n} \sim \left(\frac{n_0^2+5n_1^2}{2},\; n_0n_1\right)$ and $n$'s binary form (having $s$ bits of 1's). 
+
+\pad
+Note that zero $\mathbf{0} \sim (2, 0)$ and inverse $\displaystyle \mathbf{-a} \sim (-\frac{4a_0}{5a_1^2-a_0^2}, \frac{4a_1}{5a_1^2-a_0^2})$ are implied by $\mathbf{0} + \mathbf{1} = \mathbf{1}$ and $\mathbf{-a} + \mathbf{a} = \mathbf{0}$. $\displaystyle (-\frac{4a_0}{5a_1^2-a_0^2}, \frac{4a_1}{5a_1^2-a_0^2}) \in \mathbb{Z}^2$ implies $(5a_1^2-a_0^2)|4a_0$ and $(5a_1^2-a_0^2)|4a_1$. Define
+\[\delta_\mathbf{a}=5a_1^2-a_0^2\]
+For the sum $\mathbf{a} + \mathbf{b}$, 
+\[\delta_\mathbf{a+b}=5\left(\frac{a_0b_1+a_1b_0}{2}\right)^2-\left(\frac{a_0b_0+5a_1b_1}{2}\right)^2=\frac{-\left(5a_1^2-a_0^2\right)\left(5b_1^2-b_0^2\right)}{4}\]
+
+let $\mathbf{b} = \mathbf{1}$ or $\mathbf{-1}$, then
+\[\delta_\mathbf{a\pm 1}=-\left(5a_1^2-a_0^2\right)\]
+also, $\delta_\mathbf{0}=-4,\; \delta_\mathbf{1}=4$,
+\[\delta_\mathbf{n} = 4(-1)^{n+1}\]
+\[\mathbf{-a} \sim \left(\left(-1\right)^a a_0, \left(-1\right)^{a+1} a_1\right)\]
+
+\section{Generalized}
+
+$F_{n+2} = p F_{n+1} + q F_n + r \; (p, q, r \in \mathbb{Z})$
+
+$F_{n+2} + a F_{n+1} + b = k\left(F_{n+1} + a F_n + b\right)$
+
+$p=k-a, q=ka, r=kb-b$
+
+Characteristic polynomial $k^2-pk-q=0$
+
+$\displaystyle k=\frac{p\pm\sqrt{p^2+4q}}{2}$
+
+$(t+p)(t-p)=4q\;(t \in \mathbb{Z}[i])$
+
+$\displaystyle (\pm t,\pm p) = \left(1+q, 1-q\right), \left(\frac{4+q}{2}, \frac{4-q}{2}\right), \left(\frac{1+4q}{2},\frac{1-4q}{2} \right)$
+
+$\displaystyle q = 1 \pm p, 4 \pm 2p, \frac{1 \pm 2p}{4}$
+
+$\displaystyle q = \frac{1 \pm 2p}{4}$ contradicts $p, q \in \mathbb{Z}$
+
+\end{flushleft}
+
+\end{document}
